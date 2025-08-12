@@ -4,7 +4,6 @@ import {User} from "../models/user.model.js";
 import {uploadONCloudinary} from "../utils/cloudnary.js";
 import {ApiResponse} from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
-import { asyncWrapProviders } from "async_hooks";
 import mongoose from "mongoose";
 
 const generateAccessAndRefreshTokens = async(userID)=>{
@@ -57,6 +56,7 @@ const registerUser = asyncHandler(async (req, res)=>{
 
     const avatarLocalPath = req.files?.avatar[0]?.path
     // const coverImageLocalPath = req.files?.coverImage[0]?.path
+    
 
     let coverImageLocalPath;
     if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
@@ -154,7 +154,7 @@ const logoutUser = asyncHandler(async(req, res)=>{
         req.user._id,
         {
             $set: {
-                refreshToken : undefined
+                refreshToken : 1
             }
         },
         {
